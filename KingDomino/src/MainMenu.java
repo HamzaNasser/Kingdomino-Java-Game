@@ -1,15 +1,13 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.*;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 public class MainMenu extends JPanel implements ActionListener{
 		
-	private JButton newGame, loadGame, options;
+	private JButton newGame, loadGame, options, exit;
 	private MainUI frame;
-	private JPanel optionsMenu;
+	private OptionsMenu optionsMenu;
 		
 	public MainMenu(MainUI mainUI) {
 		super();
@@ -23,14 +21,19 @@ public class MainMenu extends JPanel implements ActionListener{
 			
 		options = new JButton("Options");
 		options.setActionCommand("options");
+		
+		exit = new JButton("Exit Game");
+		exit.setActionCommand("exit");
 			
 		newGame.addActionListener(this);
 		loadGame.addActionListener(this);
 		options.addActionListener(this);
+		exit.addActionListener(this);
 			
 		add(newGame);
 		add(loadGame);
 		add(options);
+		add(exit);
 	}
 
 	public void newGame() {
@@ -39,10 +42,6 @@ public class MainMenu extends JPanel implements ActionListener{
 		
 	public void loadGame() {
 		System.out.println("Load Game");
-	}
-		
-	public void options() {
-		System.out.println("Options");
 	}
 		
 	public void actionPerformed(ActionEvent event) {
@@ -54,6 +53,9 @@ public class MainMenu extends JPanel implements ActionListener{
 		}
 		else if ("options".equals(event.getActionCommand())) {
 			frame.changePanel(optionsMenu = new playerOptions(frame));
+		}
+		else if ("exit".equals(event.getActionCommand())) {
+			System.exit(0);
 		}
 	}
 
