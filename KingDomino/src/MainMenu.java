@@ -7,7 +7,7 @@ public class MainMenu extends JPanel implements ActionListener{
 		
 	private JButton newGame, loadGame, options, exit;
 	private MainUI frame;
-	private OptionsMenu optionsMenu;
+	private playerOptions optionsMenu;
 		
 	public MainMenu(MainUI mainUI) {
 		super();
