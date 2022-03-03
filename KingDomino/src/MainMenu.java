@@ -53,7 +53,7 @@ public class MainMenu extends JPanel implements ActionListener{
 			loadGame();
 		}
 		else if ("options".equals(event.getActionCommand())) {
-			frame.changePanel(optionsMenu = new OptionsMenu(frame));
+			frame.changePanel(optionsMenu = new playerOptions(frame));
 		}
 	}
 
