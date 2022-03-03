@@ -4,9 +4,9 @@ import javax.swing.*;
 
 public class OptionsMenu extends JPanel implements ActionListener{
 	
-	public JButton playerOptions, displayOptions, back;
+	private JButton playerOptions, displayOptions, back;
 	private MainUI frame;
-	private JPanel mainMenu;
+	private JPanel displayOptionsMenu, mainMenu;
 	
 	public OptionsMenu(MainUI mainUI) {
 		super();
@@ -35,24 +35,12 @@ public class OptionsMenu extends JPanel implements ActionListener{
 			System.out.println("Player Options");
 		}
 		else if ("displayOptions".equals(event.getActionCommand())) {
-			System.out.println("Display Options");
+			frame.changePanel(displayOptionsMenu = new DisplayOptionsMenu(frame));
 		}
 		else if ("back".equals(event.getActionCommand())) {
 			frame.changePanel(mainMenu = new MainMenu(frame));
 		}
 		
 	}
-	
-	//public void openOptionsMenu() {
-		//JFrame optionsMenu = new JFrame("Options");
-		//optionsMenu.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		
-		//OptionsMenu newContentPane = new OptionsMenu();
-		//newContentPane.setOpaque(true);
-		//optionsMenu.setContentPane(newContentPane);
-		
-		//optionsMenu.pack();
-		//optionsMenu.setVisible(true);
-	//}
 
 }

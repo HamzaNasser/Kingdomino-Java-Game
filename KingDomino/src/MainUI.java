@@ -4,14 +4,18 @@ import javax.swing.*;
 
 public class MainUI extends JFrame{
 	
-private JPanel mainMenu = new MainMenu(this);
+	private JPanel mainMenu = new MainMenu(this);
+	protected boolean fullScreen;
 	
 	public MainUI() {
+		fullScreen = false;
 		getContentPane().add(mainMenu);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		revalidate();
-		repaint();
+		pack();
+		setVisible(true);
 	}
+	
+	static GraphicsDevice device = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()[0];
 	
 	public void changePanel(JPanel panel) {
 		getContentPane().removeAll();
@@ -22,11 +26,17 @@ private JPanel mainMenu = new MainMenu(this);
 		pack();
 	}
 	
-
+	public void changeWindowMode(boolean fullScreen) {
+		if (fullScreen) {
+			device.setFullScreenWindow(this);
+		}
+		else if (!fullScreen) {
+			device.setFullScreenWindow(null);
+		}
+	}
+	
 	public static void main(String[] args) {
-		MainUI mainUI = new MainUI();
-		mainUI.pack();
-		mainUI.setVisible(true);
+		new MainUI();
 	}
 }
 	
