@@ -32,7 +32,7 @@ public class OptionsMenu extends JPanel implements ActionListener{
 	
 	public void actionPerformed(ActionEvent event) {
 		if ("playerOptions".equals(event.getActionCommand())) {
-			frame.changePanel(playerOption = new playerOptions(frame));
+			frame.changePanel(playerOption = new PlayerOptionsMenu(frame));
 		}
 		else if ("displayOptions".equals(event.getActionCommand())) {
 			frame.changePanel(displayOptionsMenu = new DisplayOptionsMenu(frame));

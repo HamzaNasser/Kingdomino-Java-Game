@@ -2,7 +2,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class playerOptions extends JPanel implements ActionListener {
+public class PlayerOptionsMenu extends JPanel implements ActionListener {
 	
     JButton changeDifficulty, back, backButton, confirmButton;
     JRadioButton easyButton, mediumButton, hardButton;
@@ -12,7 +12,7 @@ public class playerOptions extends JPanel implements ActionListener {
     private MainUI frame;
     JPanel panel, optionsPanel;
     
-    public playerOptions(MainUI mainUI){
+    public PlayerOptionsMenu(MainUI mainUI){
         super();
 		this.frame = mainUI;
 		
