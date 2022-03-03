@@ -53,7 +53,7 @@ public class DisplayOptionsMenu extends JPanel implements ActionListener{
 					"Would you like to keep the changes?",
 					"Accept Changes?",
 					JOptionPane.YES_NO_OPTION);
-			if (answer == 1) {
+			if (answer == JOptionPane.NO_OPTION) {
 				frame.changeWindowMode(!frame.fullScreen);
 			}
 			System.out.println(frame.fullScreen);

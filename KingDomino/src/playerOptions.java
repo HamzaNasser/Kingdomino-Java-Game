@@ -1,7 +1,9 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+
 public class playerOptions extends JPanel implements ActionListener {
+	
     JButton changeDifficulty, back, backButton, confirmButton;
     JRadioButton easyButton, mediumButton, hardButton;
     JTextField nameField;
@@ -9,11 +11,14 @@ public class playerOptions extends JPanel implements ActionListener {
     JLabel nameLabel, difficultyLabel, optionLabel, confirmLabel;
     private MainUI frame;
     JPanel panel, optionsPanel;
+    
     public playerOptions(MainUI mainUI){
         super();
 		this.frame = mainUI;
+		
         optionLabel = new JLabel("Settings");
         optionLabel.setFont(new Font(null, Font.ITALIC, 40));
+        
         //frame.setLayout(new BorderLayout());
         panel = new JPanel();
         confirmLabel = new JLabel("");

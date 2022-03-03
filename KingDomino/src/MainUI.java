@@ -23,7 +23,6 @@ public class MainUI extends JFrame{
 		getContentPane().doLayout();
 		revalidate();
 		repaint();
-		pack();
 	}
 	
 	public void changeWindowMode(boolean fullScreen) {
@@ -33,6 +32,8 @@ public class MainUI extends JFrame{
 		else if (!fullScreen) {
 			device.setFullScreenWindow(null);
 		}
+		revalidate();
+		repaint();
 	}
 	
 	public static void main(String[] args) {

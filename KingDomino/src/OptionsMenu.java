@@ -6,13 +6,13 @@ public class OptionsMenu extends JPanel implements ActionListener{
 	
 	private JButton playerOptions, displayOptions, back;
 	private MainUI frame;
-	private JPanel displayOptionsMenu, mainMenu;
+	private JPanel displayOptionsMenu, mainMenu, playerOption;
 	
 	public OptionsMenu(MainUI mainUI) {
 		super();
 		this.frame = mainUI;
 		
-		playerOptions = new JButton("Player Options");
+		playerOptions = new JButton("Player Settings");
 		playerOptions.setActionCommand("playerOptions");
 		
 		displayOptions = new JButton("Display Options");
@@ -32,7 +32,7 @@ public class OptionsMenu extends JPanel implements ActionListener{
 	
 	public void actionPerformed(ActionEvent event) {
 		if ("playerOptions".equals(event.getActionCommand())) {
-			System.out.println("Player Options");
+			frame.changePanel(playerOption = new playerOptions(frame));
 		}
 		else if ("displayOptions".equals(event.getActionCommand())) {
 			frame.changePanel(displayOptionsMenu = new DisplayOptionsMenu(frame));
