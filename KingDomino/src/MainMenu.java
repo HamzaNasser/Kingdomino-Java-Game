@@ -37,7 +37,8 @@ public class MainMenu extends JPanel implements ActionListener{
 	}
 
 	public void newGame() {
-		System.out.println("New Game");
+		JPanel gameGrid = new GameGrid(frame);
+		frame.changePanel(gameGrid);
 	}
 		
 	public void loadGame() {

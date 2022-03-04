@@ -5,6 +5,7 @@ import javax.swing.*;
 public class MainUI extends JFrame{
 	
 	private JPanel mainMenu = new MainMenu(this);
+	//private JPanel gameGrid = new GameGrid(this);
 	protected boolean fullScreen;
 	
 	public MainUI() {
