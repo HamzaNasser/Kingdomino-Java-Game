@@ -13,21 +13,21 @@ public class GameGrid extends JPanel implements ActionListener {
     public GameGrid(MainUI mainUI){
         super();
         this.frame = mainUI;
-        numPlayers = 4;   //hardcoded the design for 4 for now, can potentially make it a paramter later on
+        numPlayers = 4;   //hardcoded the design for 4 for now, can potentially make it a parameter later on
 //top panel with the menu
         topPanel = new JPanel();
         topPanel.setLayout(new FlowLayout());
         back = new JButton("Back");
         topPanel.add(back);
         back.addActionListener(this);
-//holds the baord
+//holds the board
         mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
         mainPanel.setSize(100,100);
         
         JPanel centerPanel1 = makeCenterPanel();
         JPanel centerPanel2 = makeCenterPanel();
-//two 1x4 blocks in boxlayout ot reprsent dominos 
+//two 1x4 blocks in boxlayout to represent dominos 
         mainCenterPanel = new JPanel();
         mainCenterPanel.setLayout(new BoxLayout(mainCenterPanel,BoxLayout.PAGE_AXIS));
         mainCenterPanel.add(centerPanel1);

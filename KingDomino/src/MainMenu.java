@@ -8,7 +8,8 @@ public class MainMenu extends JPanel implements ActionListener{
 	private JButton newGame, loadGame, options, exit;
 	private MainUI frame;
 	private OptionsMenu optionsMenu;
-		
+	
+	//Set up the main menu panel
 	public MainMenu(MainUI mainUI) {
 		super();
 		this.frame = mainUI;
@@ -35,22 +36,15 @@ public class MainMenu extends JPanel implements ActionListener{
 		add(options);
 		add(exit);
 	}
-
-	public void newGame() {
-		JPanel gameGrid = new GameGrid(frame);
-		frame.changePanel(gameGrid);
-	}
-		
-	public void loadGame() {
-		System.out.println("Load Game");
-	}
-		
+	
+	//Action events for buttons
 	public void actionPerformed(ActionEvent event) {
 		if ("newGame".equals(event.getActionCommand())) {
-			newGame();
+			JPanel gameGrid = new GameGrid(frame);
+			frame.changePanel(gameGrid);
 		}
 		else if ("loadGame".equals(event.getActionCommand())) {
-			loadGame();
+			//loadGame();
 		}
 		else if ("options".equals(event.getActionCommand())) {
 			frame.changePanel(optionsMenu = new OptionsMenu(frame));

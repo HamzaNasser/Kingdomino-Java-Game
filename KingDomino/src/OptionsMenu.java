@@ -8,6 +8,7 @@ public class OptionsMenu extends JPanel implements ActionListener{
 	private MainUI frame;
 	private JPanel displayOptionsMenu, mainMenu, playerOption;
 	
+	//Set up the options menu. This may be removed in future iterations, as the player menu probably won't be accessible from the main menu
 	public OptionsMenu(MainUI mainUI) {
 		super();
 		this.frame = mainUI;
@@ -30,6 +31,7 @@ public class OptionsMenu extends JPanel implements ActionListener{
 		add(back);
 	}
 	
+	//Action events for the buttons
 	public void actionPerformed(ActionEvent event) {
 		if ("playerOptions".equals(event.getActionCommand())) {
 			frame.changePanel(playerOption = new PlayerOptionsMenu(frame));
