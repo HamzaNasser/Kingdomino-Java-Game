@@ -8,7 +8,7 @@ public class MainUI extends JFrame{
 	protected boolean fullScreen;
 	
 	public MainUI() {
-		this.setPreferredSize(new Dimension(600, 400)); //First number is left-right, second number is up-down, current numbers are placeholders
+		this.setPreferredSize(new Dimension(1000, 1000)); //First number is left-right, second number is up-down, current numbers are placeholders
 		fullScreen = false;
 		getContentPane().add(mainMenu);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
