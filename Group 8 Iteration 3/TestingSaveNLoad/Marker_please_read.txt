@@ -1,0 +1,5 @@
+Since we are still working on the functionality of the game, we cannot implement the save and load 
+functionality until after we have the full game running. Since we have to produce a demo with save
+and load functionality implemented in this iteration, we decided to write a simple GUI to show how 
+we will be implementing the save and load functionality in the actual game.
+
