@@ -20,8 +20,10 @@ public class DisplayOptionsMenu extends JPanel implements ActionListener{
 			windowModeString = "Windowed Mode";
 		}
 		
-		//changeResolution = new JButton("Change Resolution");
-		//changeResolution.setActionCommand("resolution");
+		/*
+		changeResolution = new JButton("Change Resolution");
+		changeResolution.setActionCommand("resolution");
+		*/
 		
 		changeWindowMode = new JButton("Change to "+ windowModeString);
 		changeWindowMode.setActionCommand("windowMode");
@@ -40,15 +42,17 @@ public class DisplayOptionsMenu extends JPanel implements ActionListener{
 	
 	//Action events for the buttons
 	public void actionPerformed(ActionEvent event) {
-		//if ("resolution".equals(event.getActionCommand())) {
-			//int answer = JOptionPane.showConfirmDialog(frame,
-					//"Would you like to keep the changes?",
-					//"Accept Changes?",
-					//JOptionPane.YES_NO_OPTION);
-			//if (answer == 1) {
-				//frame.undo();
-			//}
-		//}
+		/*
+		if ("resolution".equals(event.getActionCommand())) {
+			int answer = JOptionPane.showConfirmDialog(frame,
+					"Would you like to keep the changes?",
+					"Accept Changes?",
+					JOptionPane.YES_NO_OPTION);
+			if (answer == 1) {
+				frame.undo();
+			}
+		}
+		*/
 		//Calls the method to change the JFrame from full screen to windowed, or visa versa
 		if ("windowMode".equals(event.getActionCommand())) {
 			frame.changeWindowMode(!frame.fullScreen);
