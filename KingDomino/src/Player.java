@@ -16,4 +16,12 @@ public class Player {
 		this.color = color;
 	}
 	
+	public void setPlayerName(String name) {
+		this.name = name;
+	}
+	
+	public void setPlayerColor(Color color) {
+		this.color = color;
+	}
+	
 }

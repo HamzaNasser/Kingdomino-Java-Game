@@ -1,131 +1,114 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
+
 import javax.swing.*;
 import java.awt.Color;
 
 public class PlayerOptionsMenu extends JPanel implements ActionListener {
 	
-    JButton changeDifficulty, back, backButton, confirmButton, chooseColor;
-//    JRadioButton easyButton, mediumButton, hardButton;
-    JTextField nameField;
-    ButtonGroup difficultyButtons;
-    JLabel nameLabel, difficultyLabel, optionLabel, confirmLabel,colorLabel;
+    private JButton confirmButton, chooseColor;
+    private JTextField nameField;
+    private JLabel nameLabel, optionLabel, confirmLabel, colorLabel;
     private MainUI frame;
-    JPanel panel, optionsPanel;
+    private JPanel panel, gameGrid, playerOptionsMenu;
+    private Color color;
+    private ArrayList<Player> players;
+    private int placeInArray;
     
-    public PlayerOptionsMenu(MainUI mainUI){
+    public PlayerOptionsMenu(MainUI mainUI, ArrayList<Player> players){
         super();
 		this.frame = mainUI;
+		this.players = players;
+		placeInArray = 0;
 		
-        optionLabel = new JLabel("Settings");
+        optionLabel = new JLabel("Player " + String.valueOf(placeInArray+1));
         optionLabel.setFont(new Font(null, Font.ITALIC, 40));
         colorLabel = new JLabel("Choose Color: ");
 		chooseColor = new JButton("Select Color");
 		chooseColor.addActionListener(this);        
-        //frame.setLayout(new BorderLayout());
         panel = new JPanel();
         confirmLabel = new JLabel("");
-        difficultyButtons = new ButtonGroup();
         confirmButton = new JButton("Confirm");
         confirmButton.addActionListener(this);
-        backButton = new JButton("Back");
-        backButton.addActionListener(this);
         nameLabel = new JLabel("Change Name: ");
-        difficultyLabel = new JLabel("Select Difficulty: ");
-        nameField = new JTextField();
-        
-        //changeDifficulty = new JButton("Change Difficulty");
-/*        
-        easyButton = new JRadioButton("Easy");
-        easyButton.addActionListener(this);
-        mediumButton = new JRadioButton("Medium");
-        mediumButton.addActionListener(this);
-        hardButton = new JRadioButton("Hard");
-        hardButton.addActionListener(this);
-        difficultyButtons.add(easyButton);
-        difficultyButtons.add(mediumButton);
-        difficultyButtons.add(hardButton);
-*/        
+        nameField = new JTextField();      
 
         optionLabel.setBounds(60, 0, 220, 120);
         nameLabel.setBounds(60,110,140,40);
         nameField.setBounds(170,110,240,40);
-//        difficultyLabel.setBounds(60,190,140,40);
-/*        
-        easyButton.setBounds(170, 190, 140, 20);
-        mediumButton.setBounds(170, 215, 140, 20);
-        hardButton.setBounds(170, 240, 140, 20);
-*/        
+    
         confirmButton.setBounds(190, 310, 100, 20);
-        backButton.setBounds(290, 310, 100, 20);
         confirmLabel.setBounds(170,330,340,40);
         colorLabel.setBounds(60,190,140,40);
         chooseColor.setBounds(170, 190, 240, 40);
 
         add(colorLabel);
         add(chooseColor);
-        add(backButton);
         add(confirmButton);
         add(optionLabel);
         add(nameLabel);
         add(nameField);
-        add(difficultyLabel);
         setLayout(null);
-/*        
-        add(easyButton);
-        add(mediumButton);
-        add(hardButton); 
-*/ 
-        add(confirmLabel);      
-        setSize(450, 450);
-        
-    
 
-/*
-        panel.add(nameLabel);
-        panel.add(nameField);
-        panel.add(changeDifficulty);
-        add(panel, BorderLayout.SOUTH);
-*/
-        
+        add(confirmLabel);      
+        setSize(450, 450);    
     }
  
+    public PlayerOptionsMenu(MainUI mainUI, ArrayList<Player> players, int placeInArray){
+        super();
+		this.frame = mainUI;
+		this.players = players;
+		this.placeInArray = placeInArray;
+		
+        optionLabel = new JLabel("Player " + String.valueOf(placeInArray+1));
+        optionLabel.setFont(new Font(null, Font.ITALIC, 40));
+        colorLabel = new JLabel("Choose Color: ");
+		chooseColor = new JButton("Select Color");
+		chooseColor.addActionListener(this);        
+        panel = new JPanel();
+        confirmLabel = new JLabel("");
+        confirmButton = new JButton("Confirm");
+        confirmButton.addActionListener(this);
+        nameLabel = new JLabel("Change Name: ");
+        nameField = new JTextField();      
 
+        optionLabel.setBounds(60, 0, 220, 120);
+        nameLabel.setBounds(60,110,140,40);
+        nameField.setBounds(170,110,240,40);
+    
+        confirmButton.setBounds(190, 310, 100, 20);
+        confirmLabel.setBounds(170,330,340,40);
+        colorLabel.setBounds(60,190,140,40);
+        chooseColor.setBounds(170, 190, 240, 40);
 
+        add(colorLabel);
+        add(chooseColor);
+        add(confirmButton);
+        add(optionLabel);
+        add(nameLabel);
+        add(nameField);
+        setLayout(null);
 
-
-
-
-
-
-
-
-
-
-
-    @Override
+        add(confirmLabel);      
+        setSize(450, 450);    
+    }
+    
     public void actionPerformed(ActionEvent e) {
-/*
-        if(e.getSource() == easyButton){
-            System.out.println("Easy button selected.");
-        }
-        else if(e.getSource() == mediumButton){
-            System.out.println("Medium button selected");
-        }
-        else if(e.getSource() == hardButton){
-            System.out.println("Hard Button selected");
-        }
- */       
-        if(e.getSource() == backButton){
-            frame.changePanel(optionsPanel = new OptionsMenu(frame));
-        }
 
         if(e.getSource() == confirmButton){
-            confirmLabel.setText("Settings Confirmed. Press Back to return to menu.");
+        	players.get(placeInArray).setPlayerName(nameField.getText());
+        	players.get(placeInArray).setPlayerColor(color);
+            if (placeInArray == (players.size()-1)) {
+            	frame.changePanel(gameGrid = new GameGrid(frame));
+            }
+            else {
+            	placeInArray++;
+            	frame.changePanel(playerOptionsMenu = new PlayerOptionsMenu(frame, players, placeInArray));
+            }
         }
         if(e.getSource() == chooseColor){
-            JColorChooser colorChooser = new JColorChooser();
-            Color color = JColorChooser.showDialog(null, "Pick a color ", Color.YELLOW);
+            color = JColorChooser.showDialog(null, "Pick a color ", Color.YELLOW);
 
         }
     }
