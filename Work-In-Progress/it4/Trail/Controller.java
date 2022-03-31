@@ -52,7 +52,7 @@ public class Controller implements ActionListener{
             }
             // player grid tile selected
             else if (tile.getInMiddleGrid() ==false){
-                if (flag ==0){  //first tile clicked
+                if (flag == 0){  //first tile clicked
                     firstTile = tile;
                     tile.setBackground(Color.lightGray);
                     currentPlayer.enableNeighbour(tile.getCoord());
@@ -62,19 +62,8 @@ public class Controller implements ActionListener{
                     if (tile != firstTile){ //prevent the user for clicking the same tile twice.
                         tile.setBackground(Color.lightGray);
                         //check if valid blah blah blah
-                        removeMiddleTile();
-                        //setting the fields
-                        firstTile.setTerrain(currentDomino.getTerrain_type_1());
-                        tile.setTerrain(currentDomino.getTerrain_type_2());
-                        firstTile.setOccupied(true);
-                        firstTile.setInMiddleGrid(false);
-                        tile.setOccupied(true);
-                        tile.setInMiddleGrid(false);
-                        //need to set crown but later...
-                        //placing dominos
-                        firstTile.placeDomino(currentDomino,1);
-                        tile.placeDomino(currentDomino, 2);
-                        //post turn actions
+                        checkValidity(currentPlayer, firstTile, tile);
+                        //post round actions
                         currentPlayer.setPlayerGrid(false);
                         getPlayerTurn();
                         setMiddleGrid(true);
@@ -98,13 +87,6 @@ public class Controller implements ActionListener{
             frame.revalidate(); //without this the dominos aren't visble unless if the window is resized!
             
             
-        }
-    }
-    private void disableGrid(Tile[][] playergrid){
-        for(int x=0; x<5;x++){
-            for (int y=0; y<5; y++){
-                playergrid[x][y].setEnabled(false);
-            }
         }
     }
     private Boolean getPlayerTurn(){
@@ -199,10 +181,65 @@ public class Controller implements ActionListener{
         }
 
     }
-    private void printArray(Tile[] array){
-        for (int x =0; x< array.length; x++){
-            System.out.print(array[x].getDomino().getTerrain_type_1() + " "+ array[x].getDomino().getTerrain_type_2() +"\n");
+    //Rules for placing the tile
+    private void checkValidity(Player currentPlayer, Tile tile1, Tile tile2){
+        tile1.setTerrain(currentDomino.getTerrain_type_1());
+        tile2.setTerrain(currentDomino.getTerrain_type_2());
+        boolean result_1 = currentPlayer.isPlacementValid(tile1, tile2);
+        boolean result_2 = currentPlayer.isPlacementValid(tile2, tile1);
+        if (result_1 && result_2){
+            System.out.println("1");
+            removeMiddleTile();
+            //setting the fields
+            tile1.setTerrain(currentDomino.getTerrain_type_1());
+            tile2.setTerrain(currentDomino.getTerrain_type_2());
+            tile1.setOccupied(true);
+            tile1.setInMiddleGrid(false);
+            tile2.setOccupied(true);
+            tile2.setInMiddleGrid(false);
+            //need to set crown but later...
+            //placing dominos
+            tile1.placeDomino(currentDomino,1);
+            tile2.placeDomino(currentDomino, 2);
+            //enable swap here ------------------------------------ (optional)
         }
+        else if (result_1 == true && result_2 ==false){
+            System.out.println("2");
+            removeMiddleTile();
+            //setting the fields
+            tile1.setTerrain(currentDomino.getTerrain_type_1());
+            tile2.setTerrain(currentDomino.getTerrain_type_2());
+            tile1.setOccupied(true);
+            tile1.setInMiddleGrid(false);
+            tile2.setOccupied(true);
+            tile2.setInMiddleGrid(false);
+            //need to set crown but later...
+            //placing dominos
+            tile1.placeDomino(currentDomino,1);
+            tile2.placeDomino(currentDomino, 2);
+        }
+        else if (result_1==false && result_2 ==true){
+            System.out.println("3");
+            removeMiddleTile();
+            //setting the fields   //swap
+            tile2.setTerrain(currentDomino.getTerrain_type_1());
+            tile1.setTerrain(currentDomino.getTerrain_type_2());
+            tile2.setOccupied(true);
+            tile2.setInMiddleGrid(false);
+            tile1.setOccupied(true);
+            tile1.setInMiddleGrid(false);
+            //need to set crown but later...
+            //placing dominos
+            tile2.placeDomino(currentDomino,1);
+            tile1.placeDomino(currentDomino, 2);
+        }
+        else{
+            //discard here--------------------
+            System.out.println("4");
+            removeMiddleTile();
+            currentPlayer.setTileColorWhite();
+        }
+
     }
     
 

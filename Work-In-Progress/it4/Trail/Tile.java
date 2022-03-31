@@ -23,10 +23,10 @@ public class Tile extends JButton{
     }
 
     // returns an ArrayList of the coordinates
-    public int[] getCoord(){
-        int[] coordinate = new int[2];
-        coordinate[0] = x_coord;
-        coordinate[1] = y_coord;
+    public ArrayList<Integer> getCoord(){
+        ArrayList<Integer> coordinate = new ArrayList<>();
+        coordinate.add(x_coord);
+        coordinate.add(y_coord);
         return coordinate;
     }
     //this function is used to place dominos into the game board
