@@ -83,7 +83,7 @@ public class GameUI extends JPanel{
         mainCenterPanel.setLayout(new BorderLayout());
         mainCenterPanel.add(centerPanel,BorderLayout.CENTER);
         
-        
+       /*
         //testing feature//////////////adding borderssss to the bottom 4 dominos          ///////////Intial conditionssssssssss
         Tile[] middleBottomGrid = middleSquares[1];
         player1 = players.get(0);
@@ -111,7 +111,7 @@ public class GameUI extends JPanel{
         }
 ///////////////////////////////////--------------------;;;;;;;;;;;;;;;///////////////
         /////////////////////////--------------------------/////////////////////////////////////////-----------//////////////////
-
+*/
         //b1 = new JButton("b1");
         p1.setPreferredSize(new Dimension(200,200));
         c.gridx =1;
