@@ -89,7 +89,7 @@ class FactorsTester {
 	@Test
 	public void testFactor()
 	{	
-		// TEST 1: should succeed because -1 is a invalid parameter value for a and 0 is invalid for b, therfore throws an IllegalArgumentException
+		// TEST 1: should succeed because -1 is a invalid parameter value for a and 0 is invalid for b, throws an IllegalArgumentException
 		assertThrows(IllegalArgumentException.class, () -> FactorsUtility.factor(-1,0));
 	}
 
