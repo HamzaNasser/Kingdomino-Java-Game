@@ -82,35 +82,7 @@ public class GameUI extends JPanel{
         mainCenterPanel.setLayout(new BorderLayout());
         mainCenterPanel.add(centerPanel,BorderLayout.CENTER);
         
-       /*
-        //testing feature//////////////adding borderssss to the bottom 4 dominos          ///////////Intial conditionssssssssss
-        Tile[] middleBottomGrid = middleSquares[1];
-        player1 = players.get(0);
-        player2 = players.get(1);
-        player3 = players.get(2);
-        player4 = players.get(3);
-        middleBottomGrid[0].setBorder(BorderFactory.createLineBorder(player1.getColor(),5));
-        middleBottomGrid[1].setBorder(BorderFactory.createLineBorder(player2.getColor(),5));
-        middleBottomGrid[2].setBorder(BorderFactory.createLineBorder(player3.getColor(),5));
-        middleBottomGrid[3].setBorder(BorderFactory.createLineBorder(player4.getColor(),5));
-        ///// place dominos at the bottom
-        ArrayList<Domino> deck = new DominoGenerator().getDeck();
-        Domino[] dominoList = new Domino[4];
-        for (int i = 0; i<4; i++){
-            deck.get(0).setInMiddlePanel(true);
-            dominoList[i] = deck.get(0);
-            deck.remove(0);
-        }
-        //first round //if top row is blank
-        for (int x =0; x <4; x++){
-            Tile tile = middleBottomGrid[x];
-            Domino domino = dominoList[x];
-            tile.placeDomino(domino, 0);
-            tile.setDomino(domino);
-        }
-///////////////////////////////////--------------------;;;;;;;;;;;;;;;///////////////
-        /////////////////////////--------------------------/////////////////////////////////////////-----------//////////////////
-*/
+
         //b1 = new JButton("b1");
         p1.setPreferredSize(new Dimension(200,200));
         c.gridx =1;
@@ -266,6 +238,9 @@ public class GameUI extends JPanel{
     }
     public JLabel getTurnLabel() {
         return turnLabel;
+    }
+    public JButton getDraw() {
+        return draw;
     }
     
 }
