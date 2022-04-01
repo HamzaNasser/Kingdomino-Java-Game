@@ -21,7 +21,7 @@ public class Controller implements ActionListener{
     private JLabel turnLabel;
     private Tile firstTile;
 
-    public Controller(GameUI view){
+    public Controller(GameUI view, MainUI frame){
         gameUI = view;
         playerList = gameUI.getPlayerList();
         middleGrid = gameUI.getMiddleGrid();
@@ -30,7 +30,7 @@ public class Controller implements ActionListener{
         //if 2 players removeHalf
         deck = new DominoGenerator().getDeck();
 
-        frame = gameUI.getFrame();
+        this.frame = frame;
         turnLabel = gameUI.getTurnLabel();
 
         getPlayerTurn();
@@ -244,6 +244,7 @@ public class Controller implements ActionListener{
 
     }
     
+}
 
 
 
@@ -251,8 +252,7 @@ public class Controller implements ActionListener{
 
 
 
-
-
+/*
     public static void main(String[] args) {
         //testing code main code wrriten for testing purposes
         Tile[][] l1 = new Tile[5][5];
@@ -273,7 +273,8 @@ public class Controller implements ActionListener{
         players.add(player4);
 
 
-        GameUI gui = new GameUI(players);
+        
         new Controller(gui);
     }
 }
+*/

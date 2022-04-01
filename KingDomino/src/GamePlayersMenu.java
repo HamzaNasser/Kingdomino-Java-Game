@@ -37,7 +37,7 @@ public class GamePlayersMenu extends JPanel implements ActionListener {
 		
 		add(oneHuman);
 		add(twoHumans);
-		if (game.getGameSize() == 1) {
+		if (game.getGameSize() == 4) {
 			add(threeHumans);
 			add(fourHumans);
 		}
@@ -46,36 +46,36 @@ public class GamePlayersMenu extends JPanel implements ActionListener {
 	
 	public void actionPerformed(ActionEvent event) {
 		if ("oneHuman".equals(event.getActionCommand())) {
-			Player playerOne = new Player(null, null);
+			Player playerOne = new Player(null, null, null);
 			game.addPlayer(playerOne);
-			frame.changePanel(playerOptionsMenu = new PlayerOptionsMenu(frame, game.getPlayers()));
+			frame.changePanel(playerOptionsMenu = new PlayerOptionsMenu(frame, game));
 		}
 		else if ("twoHumans".equals(event.getActionCommand())) {
-			Player playerOne = new Player(null, null);
+			Player playerOne = new Player(null, null, null);
 			game.addPlayer(playerOne);
-			Player playerTwo = new Player(null, null);
+			Player playerTwo = new Player(null, null, null);
 			game.addPlayer(playerTwo);
-			frame.changePanel(playerOptionsMenu = new PlayerOptionsMenu(frame, game.getPlayers()));
+			frame.changePanel(playerOptionsMenu = new PlayerOptionsMenu(frame, game));
 		}
 		else if ("threeHumans".equals(event.getActionCommand())) {
-			Player playerOne = new Player(null, null);
+			Player playerOne = new Player(null, null, null);
 			game.addPlayer(playerOne);
-			Player playerTwo = new Player(null, null);
+			Player playerTwo = new Player(null, null, null);
 			game.addPlayer(playerTwo);
-			Player playerThree = new Player(null, null);
+			Player playerThree = new Player(null, null, null);
 			game.addPlayer(playerThree);
-			frame.changePanel(playerOptionsMenu = new PlayerOptionsMenu(frame, game.getPlayers()));
+			frame.changePanel(playerOptionsMenu = new PlayerOptionsMenu(frame, game));
 		}
 		else if ("fourHumans".equals(event.getActionCommand())) {
-			Player playerOne = new Player(null, null);
+			Player playerOne = new Player(null, null, null);
 			game.addPlayer(playerOne);
-			Player playerTwo = new Player(null, null);
+			Player playerTwo = new Player(null, null, null);
 			game.addPlayer(playerTwo);
-			Player playerThree = new Player(null, null);
+			Player playerThree = new Player(null, null, null);
 			game.addPlayer(playerThree);
-			Player playerFour = new Player(null, null);
+			Player playerFour = new Player(null, null, null);
 			game.addPlayer(playerFour);
-			frame.changePanel(playerOptionsMenu = new PlayerOptionsMenu(frame, game.getPlayers()));
+			frame.changePanel(playerOptionsMenu = new PlayerOptionsMenu(frame, game));
 		}
 		else if ("back".equals(event.getActionCommand())) {
 			frame.changePanel(gameSizeMenu = new GameSizeMenu(frame));

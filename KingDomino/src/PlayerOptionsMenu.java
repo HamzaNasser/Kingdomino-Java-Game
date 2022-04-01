@@ -13,13 +13,13 @@ public class PlayerOptionsMenu extends JPanel implements ActionListener {
     private MainUI frame;
     private JPanel panel, gameGrid, playerOptionsMenu;
     private Color color;
-    private ArrayList<Player> players;
+    private GameSettings game;
     private int placeInArray;
     
-    public PlayerOptionsMenu(MainUI mainUI, ArrayList<Player> players){
+    public PlayerOptionsMenu(MainUI mainUI, GameSettings game){
         super();
 		this.frame = mainUI;
-		this.players = players;
+		this.game = game;
 		placeInArray = 0;
 		
         optionLabel = new JLabel("Player " + String.valueOf(placeInArray+1));
@@ -55,10 +55,10 @@ public class PlayerOptionsMenu extends JPanel implements ActionListener {
         setSize(450, 450);    
     }
  
-    public PlayerOptionsMenu(MainUI mainUI, ArrayList<Player> players, int placeInArray){
+    public PlayerOptionsMenu(MainUI mainUI, GameSettings game, int placeInArray){
         super();
 		this.frame = mainUI;
-		this.players = players;
+		this.game = game;
 		this.placeInArray = placeInArray;
 		
         optionLabel = new JLabel("Player " + String.valueOf(placeInArray+1));
@@ -97,14 +97,33 @@ public class PlayerOptionsMenu extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         if(e.getSource() == confirmButton){
-        	players.get(placeInArray).setPlayerName(nameField.getText());
-        	players.get(placeInArray).setPlayerColor(color);
-            if (placeInArray == (players.size()-1)) {
-            	frame.changePanel(gameGrid = new GameGrid(frame));
+        	game.getPlayers().get(placeInArray).setName(nameField.getText());
+        	game.getPlayers().get(placeInArray).setColor(color);
+            if (placeInArray == (game.getPlayers().size()-1)) {
+            	if (game.getGameSize() == 2) {
+            		if (placeInArray == 0) {
+            			game.addPlayer(new Bot("Bot 1", Color.GRAY, null));
+            		}
+            	}
+            	else if (game.getGameSize() == 4) {
+            		if (placeInArray == 0) {
+            			game.addPlayer(new Bot("Bot 1", Color.GRAY, null));
+            			game.addPlayer(new Bot("Bot 2", Color.DARK_GRAY, null));
+            			game.addPlayer(new Bot("Bot 3", Color.LIGHT_GRAY, null));
+            		}
+            		else if (placeInArray == 1) {
+            			game.addPlayer(new Bot("Bot 1", Color.GRAY, null));
+            			game.addPlayer(new Bot("Bot 2", Color.DARK_GRAY, null));
+            		}
+            		else if (placeInArray == 2) {
+            			game.addPlayer(new Bot("Bot 1", Color.GRAY, null));
+            		}
+            	}
+            	frame.changePanel(gameGrid = new GameUI(game.getPlayers(), frame));
             }
             else {
             	placeInArray++;
-            	frame.changePanel(playerOptionsMenu = new PlayerOptionsMenu(frame, players, placeInArray));
+            	frame.changePanel(playerOptionsMenu = new PlayerOptionsMenu(frame, game, placeInArray));
             }
         }
         if(e.getSource() == chooseColor){

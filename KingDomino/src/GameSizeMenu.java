@@ -33,12 +33,12 @@ public class GameSizeMenu extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent event) {
 		if ("twoPlayer".equals(event.getActionCommand())) {
 			GameSettings game = new GameSettings();
-			game.setGameSize(0);
+			game.setGameSize(2);
 			frame.changePanel(gamePlayerMenu = new GamePlayersMenu(frame, game));
 		}
 		else if ("fourPlayer".equals(event.getActionCommand())) {
 			GameSettings game = new GameSettings();
-			game.setGameSize(1);
+			game.setGameSize(4);
 			frame.changePanel(gamePlayerMenu = new GamePlayersMenu(frame, game));
 		}
 		else if ("back".equals(event.getActionCommand())) {

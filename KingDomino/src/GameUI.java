@@ -146,7 +146,7 @@ public class GameUI extends JPanel{
         add(topPanel,BorderLayout.NORTH);
         add(mainPanel,BorderLayout.CENTER);
         ////////////////////////////////////////////////////////////////////////////////////////////////
-        controller = new Controller(this);
+        controller = new Controller(this, frame);
         this.addController();
         test.addActionListener(controller);
         draw.addActionListener(controller);
