@@ -7,12 +7,11 @@ import javax.swing.border.*;
 
 
 public class GameUI extends JPanel{
-    //private JFrame frame;
     private MainUI frame;//
     private JPanel p1, p2, p3, p4, mainPanel, mainCenterPanel, topPanel;
     private Tile [][]  l1, l2, middleSquares, l3, l4;
     private Player player1, player2, player3, player4;
-    private  Controller controller;
+    private Controller controller;
     private JButton save, load, draw, test;
     private JLabel turnLabel;
     private ArrayList<Player> players;
@@ -226,9 +225,8 @@ public class GameUI extends JPanel{
 
     
     //--------------------------------------------------------------------------------------------------------//
-    public Player[] getPlayerList(){
-        Player[] playerList = players.toArray(new Player[0]);
-        return playerList;
+    public ArrayList<Player> getPlayerList(){
+        return players;
     }
     public Tile[][] getMiddleGrid() {
         return middleSquares;
@@ -242,8 +240,8 @@ public class GameUI extends JPanel{
             }
         }
         //adding actionListener to each tile in playergrid for each player
-        Player[] playerList = this.getPlayerList();
-        for (Player player : playerList){
+        //Player[] playerList = this.getPlayerList();
+        for (Player player : players){
             Tile[][] playerGrid = player.getPlayerGrid();
             for (int x = 0; x < 5; x++ ){
                 for (int y=0; y<5; y++){
