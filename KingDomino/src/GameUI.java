@@ -197,8 +197,12 @@ public class GameUI extends JPanel{
 
     
     //--------------------------------------------------------------------------------------------------------//
-    public ArrayList<Player> getPlayerList(){
-        return players;
+    public Player[] getPlayerList(){
+        //if num_of_players == 2
+        Player[] playerList = new Player[2];
+        playerList[0] = player1;
+        playerList[1] = player2;
+        return playerList;
     }
     public Tile[][] getMiddleGrid() {
         return middleSquares;
@@ -212,7 +216,7 @@ public class GameUI extends JPanel{
             }
         }
         //adding actionListener to each tile in playergrid for each player
-        //Player[] playerList = this.getPlayerList();
+        Player[] playerList = this.getPlayerList();
         for (Player player : players){
             Tile[][] playerGrid = player.getPlayerGrid();
             for (int x = 0; x < 5; x++ ){

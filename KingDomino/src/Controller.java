@@ -10,7 +10,7 @@ public class Controller implements ActionListener{
     
     private GameUI gameUI;
     private Tile[][] middleGrid;
-    private ArrayList<Player> playerList;
+    private Player[] playerList;
     private int flag = 0;
     private Player currentPlayer;
     private Domino currentDomino;
