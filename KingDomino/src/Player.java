@@ -9,6 +9,7 @@ public class Player {
     private String name;
     private Color color;
     private Tile[][] playerGrid;
+    private int territorySize = 0;
 
     public Player(String name, Color color, Tile[][] playerGrid){
         this.name = name;
@@ -141,6 +142,32 @@ public class Player {
         playerGrid[2][2].placeCastle();
         playerGrid[2][2].setEnabled(false);
     }
-
+    
+    public int calculateScore(ArrayList<Integer> tileCoords) {
+    	int scoreCount = 0;
+    	boolean isLast = (territorySize == 0);
+    	for (Tile[] tileRow : playerGrid) {
+    		for (Tile tile : tileRow) {
+    			if (!tile.getCounted() && (tile.getTerrain() != "")) {
+    				scoreCount += tile.getCrowns();
+    				territorySize++;
+    				ArrayList<ArrayList<Integer>> neighbourList = AddNeighbours(tile.getCoord());
+    				for (ArrayList<Integer> neighbourCoords : neighbourList) {
+    					String neighbourTerrain = this.playerGrid[neighbourCoords.get(0)][neighbourCoords.get(1)].getTerrain();
+    					if (tile.getTerrain().equals(neighbourTerrain)) {
+    						scoreCount += calculateScore(neighbourCoords);
+    					}
+    				}
+    			}
+    			if (isLast) {
+    				return scoreCount * territorySize;
+    			}
+    			else {
+    				return scoreCount;
+    			}
+    		}
+    	}
+		return scoreCount;
+    }
 
 }

@@ -8,7 +8,7 @@ public class Tile extends JButton{
     private int crowns;
     private String terrain;
     private Domino domino;
-    private Boolean inMiddleGrid, occupied;
+    private Boolean inMiddleGrid, occupied, counted;
     
     //Custom JPanel that also stores x and y coordinate
     public Tile(int x, int y, String terrain, Boolean inMiddleGrid){
@@ -20,6 +20,7 @@ public class Tile extends JButton{
         crowns = 0;
         this.inMiddleGrid = inMiddleGrid;
         occupied = false;
+        counted = false;
     }
 
     // returns an ArrayList of the coordinates
@@ -101,6 +102,12 @@ public class Tile extends JButton{
     }
     public void setOccupied(Boolean occupied) {
         this.occupied = occupied;
+    }
+    public boolean getCounted() {
+    	return counted;
+    }
+    public void setCounted() {
+    	this.counted = true;
     }
 
 }
