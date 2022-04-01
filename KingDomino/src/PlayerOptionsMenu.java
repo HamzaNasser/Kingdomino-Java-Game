@@ -99,6 +99,16 @@ public class PlayerOptionsMenu extends JPanel implements ActionListener {
         if(e.getSource() == confirmButton){
         	game.getPlayers().get(placeInArray).setName(nameField.getText());
         	game.getPlayers().get(placeInArray).setColor(color);
+        	for (Player player : game.getPlayers()) {
+        		if ((game.getPlayers().get(placeInArray).getColor().equals(player.getColor())) && (game.getPlayers().get(placeInArray) != player)) {
+        			JLabel colorError = new JLabel("Sorry, that color is already taken. Please choose another.");
+        			colorError.setBounds(170, 260, 340, 40);
+        			add(colorError);
+        			frame.revalidate();
+        			frame.repaint();
+        			return;
+        		}
+        	}
             if (placeInArray == (game.getPlayers().size()-1)) {
             	if (game.getGameSize() == 2) {
             		if (placeInArray == 0) {
