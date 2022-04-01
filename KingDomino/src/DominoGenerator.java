@@ -18,7 +18,7 @@ public class DominoGenerator {
             ImageIcon dominoImg = new ImageIcon(imgList[(i*3)]);
             ImageIcon firstHalfImg = new ImageIcon(imgList[(i*3)+1]);
             ImageIcon secondHalfImg = new ImageIcon(imgList[(i*3)+2]);
-            Domino domino = new Domino(0,i+1,dominoImg,firstHalfImg,secondHalfImg);
+            Domino domino = new Domino(i+1,0,dominoImg,firstHalfImg,secondHalfImg);
             deck.add(domino);
         }
         deck.get(0).setTerrain_type_1(terrainNames[0]);
@@ -39,6 +39,11 @@ public class DominoGenerator {
         deck.get(6).setTerrain_type_2(terrainNames[2]);
         deck.get(7).setTerrain_type_1(terrainNames[2]);
         deck.get(7).setTerrain_type_2(terrainNames[2]);
+
+        deck.get(0).setCrownOnFirstHalf(1);
+        deck.get(0).setCrown(5);
+        deck.get(1).setCrownOnFirstHalf(0);
+        deck.get(1).setCrown(3);
     }
     public ArrayList<Domino> getDeck() {
         return deck;

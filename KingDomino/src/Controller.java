@@ -16,12 +16,13 @@ public class Controller implements ActionListener{
     private Domino currentDomino;
     private ArrayList<JButton> buttonsList;
     private ArrayList<Domino> deck;
-    //private JFrame frame;
-    private MainUI frame;
+    private JFrame frame;
+    //private MainUI frame;
     private JLabel turnLabel;
+    private JButton drawDomino;
     private Tile firstTile;
 
-    public Controller(GameUI view, MainUI frame){
+    public Controller(GameUI view){
         gameUI = view;
         playerList = gameUI.getPlayerList();
         middleGrid = gameUI.getMiddleGrid();
@@ -30,8 +31,9 @@ public class Controller implements ActionListener{
         //if 2 players removeHalf
         deck = new DominoGenerator().getDeck();
 
-        this.frame = frame;
+        frame = gameUI.getFrame();
         turnLabel = gameUI.getTurnLabel();
+        drawDomino = gameUI.getDraw();
 
         getPlayerTurn();
         disableEverything();
@@ -67,26 +69,18 @@ public class Controller implements ActionListener{
                         checkValidity(currentPlayer, firstTile, tile);
                         //post round actions
                         currentPlayer.setPlayerGrid(false);
-                        getPlayerTurn();
+                        if (getPlayerTurn() == false){drawDomino.setEnabled(true);}
                         setMiddleGrid(true);
                         flag = 0;
                     }
                 }
-
             }
         }
-
-
-        if (selected.equals(buttonsList.get(1))){ //unpack the button
-            //disable player grid
-            removeMiddleTile();
-            setMiddleGrid(true);
-            getPlayerTurn(); //if returns false ----start up next round--- enable draw dominos
-        }
-        if (selected.equals(buttonsList.get(0))){
+        if (selected.equals(drawDomino)){
             withdrawDominos();
             JFrame frame = gameUI.getFrame();
             frame.revalidate(); //without this the dominos aren't visble unless if the window is resized!
+            drawDomino.setEnabled(false);
             
             
         }
@@ -146,13 +140,19 @@ public class Controller implements ActionListener{
         }
     }
 
-    private void withdrawDominos(){
+    private boolean withdrawDominos(){
+        if (deck.size() ==0){ //empty deck
+            System.out.println("END GAME!!");
+            return false;
+
+        }
         Domino[] dominoList = new Domino[4];
-        for (int i = 0; i<4; i++){
+        for (int i = 0; i <4; i++){
             deck.get(0).setInMiddlePanel(true);
             dominoList[i] = deck.get(0);
             deck.remove(0);
         }
+        Arrays.sort(dominoList, Comparator.comparingInt(Domino::getDomino_value)); //orders the dominos in ascending order.
         //first round //if top row is blank
         if (middleGrid[0][0].getBorder() == BorderFactory.createEmptyBorder()){
             for (int x =0; x <4; x++){
@@ -160,7 +160,9 @@ public class Controller implements ActionListener{
                 Domino domino = dominoList[x];
                 tile.placeDomino(domino, 0);
                 tile.setDomino(domino);
+                
             }
+            return true;
         }
         //other rounds //move top row to the bottom, and the bottom row to the top and then populate!
         else if (middleGrid[0][0].getBorder() != BorderFactory.createEmptyBorder()){
@@ -181,6 +183,8 @@ public class Controller implements ActionListener{
         disableEverything();
         setMiddleGrid(true);
         }
+        return true;
+
 
     }
     //Rules for placing the tile
@@ -195,6 +199,13 @@ public class Controller implements ActionListener{
             //setting the fields
             tile1.setTerrain(currentDomino.getTerrain_type_1());
             tile2.setTerrain(currentDomino.getTerrain_type_2());
+            //adding crowns to the tiles 
+            if (currentDomino.getCrownOnFirstHalf() == 1){
+                tile1.setCrowns(currentDomino.getCrown());
+            }
+            else if (currentDomino.getCrownOnFirstHalf() == 0){
+                tile2.setCrowns(currentDomino.getCrown());
+            }
             tile1.setOccupied(true);
             tile1.setInMiddleGrid(false);
             tile2.setOccupied(true);
@@ -205,12 +216,19 @@ public class Controller implements ActionListener{
             tile2.placeDomino(currentDomino, 2);
             //enable swap here ------------------------------------ (optional)
         }
-        else if (result_1 == true && result_2 ==false){
+        else if (result_1 == true && result_2 == false){
             System.out.println("2");
             removeMiddleTile();
             //setting the fields
             tile1.setTerrain(currentDomino.getTerrain_type_1());
             tile2.setTerrain(currentDomino.getTerrain_type_2());
+            //adding crowns to the tiles 
+            if (currentDomino.getCrownOnFirstHalf() == 1){
+                tile1.setCrowns(currentDomino.getCrown());
+            }
+            else if (currentDomino.getCrownOnFirstHalf() == 0){
+                tile2.setCrowns(currentDomino.getCrown());
+            }
             tile1.setOccupied(true);
             tile1.setInMiddleGrid(false);
             tile2.setOccupied(true);
@@ -226,6 +244,13 @@ public class Controller implements ActionListener{
             //setting the fields   //swap
             tile2.setTerrain(currentDomino.getTerrain_type_1());
             tile1.setTerrain(currentDomino.getTerrain_type_2());
+            //adding crowns to the tiles 
+            if (currentDomino.getCrownOnFirstHalf() == 1){
+                tile2.setCrowns(currentDomino.getCrown());
+            }
+            else if (currentDomino.getCrownOnFirstHalf() == 0){
+                tile1.setCrowns(currentDomino.getCrown());
+            }
             tile2.setOccupied(true);
             tile2.setInMiddleGrid(false);
             tile1.setOccupied(true);
@@ -241,10 +266,10 @@ public class Controller implements ActionListener{
             removeMiddleTile();
             currentPlayer.setTileColorWhite();
         }
+        System.out.println("first_tile crown: "+ tile1.getCrowns() + " second_tile_crowns " +tile2.getCrowns());
 
     }
     
-}
 
 
 
@@ -252,7 +277,8 @@ public class Controller implements ActionListener{
 
 
 
-/*
+
+
     public static void main(String[] args) {
         //testing code main code wrriten for testing purposes
         Tile[][] l1 = new Tile[5][5];
@@ -273,8 +299,7 @@ public class Controller implements ActionListener{
         players.add(player4);
 
 
-        
+        GameUI gui = new GameUI(players);
         new Controller(gui);
     }
 }
-*/

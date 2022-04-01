@@ -3,8 +3,8 @@ import javax.swing.*;
 public class Domino {
     private String terrain_type_1, terrain_type_2;
     private ImageIcon dominoImg, firstHalfImg, secondHalfImg;
-    private int domino_value,crown;
-    private Boolean crownOnFirstHalf;
+    private int domino_value, crown;
+    private int crownOnFirstHalf; //1 == true //0== false //2 == none
     //these are used when the game is saved/loaded, they'll be used to locate the dominos
     private Boolean inMiddlePanel, inPlayerGrid, discarded;
     private int[] middlePanelCoord; //might be an arrayccoordinate 
@@ -22,7 +22,7 @@ public class Domino {
         inMiddlePanel = false; 
         inPlayerGrid = false; 
         discarded = false;
-        crownOnFirstHalf = null;
+        crownOnFirstHalf = 2;
     }
 
     //getters and setters....
@@ -150,10 +150,10 @@ public class Domino {
         return crown;
     }
 
-    public void setCrownOnFirstHalf(Boolean crownOnFirstHalf) {
+    public void setCrownOnFirstHalf(int crownOnFirstHalf) {
         this.crownOnFirstHalf = crownOnFirstHalf;
     }
-    public Boolean getCrownOnFirstHalf() {
+    public int getCrownOnFirstHalf() {
         return crownOnFirstHalf;
     }
 

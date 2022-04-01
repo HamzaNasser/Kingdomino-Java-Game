@@ -14,11 +14,6 @@ public class Player {
         this.name = name;
         this.color = color;
         this.playerGrid = playerGrid;
-
-        //creating the King tile 
-        //playerGrid[2][2].setBackground(color);
-        //playerGrid[2][2].placeCastle();
-        //playerGrid[2][2].setEnabled(false);
     }
 
     public String getName() {
@@ -139,6 +134,12 @@ public class Player {
         for (ArrayList<Integer> element: list){
             System.out.println(Arrays.toString(element.toArray()));
         }
+    }
+    public void createCastle(){
+        //creating the King tile 
+        playerGrid[2][2].setBackground(color);
+        playerGrid[2][2].placeCastle();
+        playerGrid[2][2].setEnabled(false);
     }
 
 
