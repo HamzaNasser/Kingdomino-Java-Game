@@ -30,13 +30,15 @@ public class Controller implements ActionListener{
         //if 2 players removeHalf
         deck = new DominoGenerator().getDeck();
 
+        //set the initial order of play
+        initializeGame();
+        
         this.frame = frame;
         turnLabel = gameUI.getTurnLabel();
-        //drawDomino = gameUI.getDraw();
+        drawDomino = gameUI.getDraw();
+        
 
-        getPlayerTurn();
         disableEverything();
-        setMiddleGrid(true);
 
     }
 
@@ -267,6 +269,40 @@ public class Controller implements ActionListener{
         }
         System.out.println("first_tile crown: "+ tile1.getCrowns() + " second_tile_crowns " +tile2.getCrowns());
 
+    }
+    private void initializeGame(){
+        getPlayerTurn();
+        Tile[] middleBottomGrid = middleGrid[1];
+        Player[] players = playerList.clone();
+        ArrayList<Player> randomizeList = new ArrayList<>();
+        Collections.addAll(randomizeList, players);
+        Collections.shuffle(randomizeList); //produces a random order of turns
+        if (playerList.length == 4){
+            for (int i =0; i<4; i++){
+                middleBottomGrid[i].setBorder(BorderFactory.createLineBorder(randomizeList.get(i).getColor(),5));
+            }
+        }
+        else if (playerList.length ==2){
+            randomizeList.addAll(randomizeList);
+            Collections.shuffle(randomizeList); //more shuffle
+            for (int i =0; i<4; i++){
+                middleBottomGrid[i].setBorder(BorderFactory.createLineBorder(randomizeList.get(i).getColor(),5));
+            }
+        }
+        //placing middle tilws.
+        Domino[] dominoList = new Domino[4];
+        for (int i = 0; i<4; i++){
+            deck.get(0).setInMiddlePanel(true);
+            dominoList[i] = deck.get(0);
+            deck.remove(0);
+        }
+        //first round //if top row is blank
+        for (int x =0; x <4; x++){
+            Tile tile = middleBottomGrid[x];
+            Domino domino = dominoList[x];
+            tile.placeDomino(domino, 0);
+            tile.setDomino(domino);
+        }
     }
     
 
