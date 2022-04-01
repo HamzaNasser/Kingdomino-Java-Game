@@ -198,10 +198,7 @@ public class GameUI extends JPanel{
     
     //--------------------------------------------------------------------------------------------------------//
     public Player[] getPlayerList(){
-        //if num_of_players == 2
-        Player[] playerList = new Player[2];
-        playerList[0] = player1;
-        playerList[1] = player2;
+        Player[] playerList = players.toArray(new Player[0]);
         return playerList;
     }
     public Tile[][] getMiddleGrid() {
