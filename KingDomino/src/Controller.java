@@ -276,6 +276,7 @@ public class Controller implements ActionListener{
         Player[] players = playerList.clone();
         ArrayList<Player> randomizeList = new ArrayList<>();
         Collections.addAll(randomizeList, players);
+        System.out.println(randomizeList.toString());
         Collections.shuffle(randomizeList); //produces a random order of turns
         if (playerList.length == 4){
             for (int i =0; i<4; i++){
