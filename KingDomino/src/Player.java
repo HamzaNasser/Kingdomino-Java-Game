@@ -160,7 +160,10 @@ public class Player {
     				}
     			}
     			if (isLast) {
-    				return scoreCount * territorySize;
+    				int tempSize = territorySize;
+    				territorySize = 0;
+    				return scoreCount * tempSize;
+    				
     			}
     			else {
     				return scoreCount;
