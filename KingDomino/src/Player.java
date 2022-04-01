@@ -143,34 +143,53 @@ public class Player {
         playerGrid[2][2].setEnabled(false);
     }
     
-    public int calculateScore(ArrayList<Integer> tileCoords) {
+    public ArrayList<Tile> getNeighboursList(Tile tile){
+    	ArrayList<Tile> neighbours = new ArrayList<>();
+    	ArrayList<Integer> coords = new ArrayList<>();
+    	int xcoord = tile.getXcoord();
+    	int ycoord = tile.getYcoord();
+    	coords.add(xcoord);
+    	coords.add(ycoord);
+    	for (ArrayList<Integer> neighbourCoord : AddNeighbours(coords)) {
+    		int neighbourX = neighbourCoord.get(0);
+    		int neighbourY = neighbourCoord.get(1);
+    		if (tile.getTerrain().equals(playerGrid[neighbourX][neighbourY].getTerrain())) {
+    			neighbours.add(playerGrid[neighbourX][neighbourY]);
+    		}
+    	}
+    	return neighbours;
+    	
+    }
+    
+    public int cascadeScore(Tile tile) {
     	int scoreCount = 0;
-    	boolean isLast = (territorySize == 0);
-    	for (Tile[] tileRow : playerGrid) {
-    		for (Tile tile : tileRow) {
-    			if (!tile.getCounted() && (tile.getTerrain() != "")) {
-    				scoreCount += tile.getCrowns();
-    				territorySize++;
-    				ArrayList<ArrayList<Integer>> neighbourList = AddNeighbours(tile.getCoord());
-    				for (ArrayList<Integer> neighbourCoords : neighbourList) {
-    					String neighbourTerrain = this.playerGrid[neighbourCoords.get(0)][neighbourCoords.get(1)].getTerrain();
-    					if (tile.getTerrain().equals(neighbourTerrain)) {
-    						scoreCount += calculateScore(neighbourCoords);
-    					}
-    				}
-    			}
-    			if (isLast) {
-    				int tempSize = territorySize;
-    				territorySize = 0;
-    				return scoreCount * tempSize;
-    				
-    			}
-    			else {
-    				return scoreCount;
-    			}
+    	for (Tile neighbour: getNeighboursList(tile)) {
+    		if (!neighbour.getCounted()) {
+    			territorySize += 1;
+    			scoreCount += neighbour.getCrowns();
+    			neighbour.setCounted();
+    			return scoreCount + cascadeScore(neighbour);
     		}
     	}
 		return scoreCount;
+    }
+    
+    public int calculateScore() {
+    	int scoreCount = 0;
+    	int totalScore = 0;
+    	for (Tile[] tileRow : playerGrid) {
+    		for (Tile tile : tileRow) {
+    			territorySize = 0;
+    			if (!tile.getCounted()) {
+    				territorySize += 1;
+    				tile.setCounted();
+    				scoreCount += tile.getCrowns() + cascadeScore(tile);
+    				scoreCount = territorySize * scoreCount;
+    				totalScore += scoreCount;
+    			}
+    		}
+    	}
+		return totalScore;
     }
 
 }
