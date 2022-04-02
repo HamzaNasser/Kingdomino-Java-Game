@@ -1,4 +1,4 @@
-Please Run from the Command Line., MainUI has the the main method.
+Please Run from the Command Line., MainUI has the the main method, please use eclipse.
 PLEASE CHECK THIS VIDEO DEMO FOR CLARITY: https://drive.google.com/file/d/14I5q3hfEfYpMb1dClKUckvVrGEeMCKdM/view?usp=sharing
 thank you!
 
