@@ -140,7 +140,7 @@ public class PlayerOptionsMenu extends JPanel implements ActionListener {
             }
         }
         if(e.getSource() == chooseColor){
-            color = JColorChooser.showDialog(null, "Pick a color ", Color.YELLOW);
+            color = JColorChooser.showDialog(frame, "Pick a color ", Color.YELLOW);
 
         }
     }
