@@ -1,4 +1,4 @@
-Please Run from the Command Line., MainUI is the main class.
+Please Run from the Command Line., MainUI has the the main method.
 
 There is only 2 and 4 player game with actual players implemented, so please choose that option.
 As we counldn't implement the AI version of the game.
