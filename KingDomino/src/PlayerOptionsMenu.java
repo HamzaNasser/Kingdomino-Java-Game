@@ -16,6 +16,7 @@ public class PlayerOptionsMenu extends JPanel implements ActionListener {
     private GameSettings game;
     private int placeInArray;
     
+    //Default PlayerOptionMenu constructor
     public PlayerOptionsMenu(MainUI mainUI, GameSettings game){
         super();
 		this.frame = mainUI;
@@ -55,6 +56,7 @@ public class PlayerOptionsMenu extends JPanel implements ActionListener {
         setSize(450, 450);    
     }
  
+    //Alternate PlayerOptionMenu constructor, used when multiple players need to be initialized
     public PlayerOptionsMenu(MainUI mainUI, GameSettings game, int placeInArray){
         super();
 		this.frame = mainUI;
@@ -94,6 +96,7 @@ public class PlayerOptionsMenu extends JPanel implements ActionListener {
         setSize(450, 450);    
     }
     
+    //Action events for the buttons
     public void actionPerformed(ActionEvent e) {
 
         if(e.getSource() == confirmButton){

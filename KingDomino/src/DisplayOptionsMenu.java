@@ -9,7 +9,7 @@ public class DisplayOptionsMenu extends JPanel implements ActionListener{
 	private JPanel mainMenu;
 	private String windowModeString;
 	
-	//Setup the DisplayOptionsMenu panel
+	//DisplayOptionMenu constructor
 	public DisplayOptionsMenu(MainUI mainUI) {
 		super();
 		this.frame = mainUI;
@@ -21,6 +21,7 @@ public class DisplayOptionsMenu extends JPanel implements ActionListener{
 		}
 		
 		/*
+		// Scrapped resolution option
 		changeResolution = new JButton("Change Resolution");
 		changeResolution.setActionCommand("resolution");
 		*/

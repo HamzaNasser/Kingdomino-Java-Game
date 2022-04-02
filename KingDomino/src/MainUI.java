@@ -7,6 +7,7 @@ public class MainUI extends JFrame{
 	private JPanel mainMenu = new MainMenu(this);
 	protected boolean fullScreen;
 	
+	//MainUI constructor
 	public MainUI() {
 		this.setPreferredSize(new Dimension(1000, 1000)); //First number is left-right, second number is up-down, current numbers are placeholders
 		fullScreen = false;
@@ -45,7 +46,7 @@ public class MainUI extends JFrame{
 		revalidate();
 		repaint();
 	}
-	
+
 	public static void main(String[] args) {
 		new MainUI();
 	}

@@ -8,6 +8,7 @@ public class GameSizeMenu extends JPanel implements ActionListener {
 	private MainUI frame;
 	private JPanel mainMenu, gamePlayerMenu;
 	
+	//GameSizeMenu constructor
 	public GameSizeMenu(MainUI mainUI) {
 		super();
 		this.frame = mainUI;
@@ -30,6 +31,7 @@ public class GameSizeMenu extends JPanel implements ActionListener {
 		add(back);
 	}
 	
+	//Action event for the buttons
 	public void actionPerformed(ActionEvent event) {
 		if ("twoPlayer".equals(event.getActionCommand())) {
 			GameSettings game = new GameSettings();

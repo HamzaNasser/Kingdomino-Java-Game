@@ -9,6 +9,7 @@ public class GamePlayersMenu extends JPanel implements ActionListener {
 	private JPanel gameSizeMenu, gameGrid, playerOptionsMenu;
 	private GameSettings game;
 	
+	//GamePlayerMenu constructor
 	public GamePlayersMenu(MainUI mainUI, GameSettings game) {
 		super();
 		this.frame = mainUI;
@@ -44,6 +45,7 @@ public class GamePlayersMenu extends JPanel implements ActionListener {
 		add(back);
 	}
 	
+	//Action event methods
 	public void actionPerformed(ActionEvent event) {
 		if ("oneHuman".equals(event.getActionCommand())) {
 			Player playerOne = new Player(null, null, null);
