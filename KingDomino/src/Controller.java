@@ -30,9 +30,9 @@ public class Controller implements ActionListener{
         //if 2 players removeHalf
         DominoGenerator  dominoGenerator= new DominoGenerator();
         deck = dominoGenerator.getDeck();
-        /*if (playerList.length == 2){
+        if (playerList.length == 2){
             dominoGenerator.removeHalfOfDeck(deck);
-        }*/
+        }
 
         //set the initial order of play
         initializeGame();
