@@ -1,3 +1,5 @@
+Please Run from the Command Line.
+
 There is only 2 and 4 player game with actual players implemented, so please choose that option.
 As we counldn't implement the AI version of the game.
 
