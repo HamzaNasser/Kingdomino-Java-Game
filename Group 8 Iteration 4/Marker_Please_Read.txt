@@ -7,7 +7,9 @@ order.
 
 King Figures are represented by the border around the middle gird tiles.
 
-End game (points calculation) is also in complete.
+End game (points calculation) is also incomplete.
+
+Load and save buttons are also not complete.
 
 We tired to address the Color Deficiency by allowing users to make colors of their choice.
 
