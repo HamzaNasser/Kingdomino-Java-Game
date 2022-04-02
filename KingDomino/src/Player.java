@@ -56,20 +56,25 @@ public class Player {
         }
     }
     
-    public void enableNeighbour(ArrayList<Integer> coordinate){
+    public boolean enableNeighbour(ArrayList<Integer> coordinate){
         ArrayList<ArrayList<Integer>> neighbouList = AddNeighbours(coordinate);
+        int checker = 0; //checks if no neighbours can be clicked 
         for (int x=0; x<5; x++){
             for (int y=0; y<5; y++){
                 ArrayList<Integer> arr = new ArrayList<>();
                 arr.add(x);
                 arr.add(y);
                 if (playerGrid[x][y].getOccupied() == false && neighbouList.contains(arr)){
+                    checker++;
                     playerGrid[x][y].setEnabled(true);
                 }
                 else{ playerGrid[x][y].setEnabled(false);}
             }
         }
-    }    
+        System.out.println("Checker value: " + checker);
+        if (checker==0){ return false;} // no neighbours can be clicked 
+        else{return true;}
+    }   
 
     private ArrayList<ArrayList<Integer>> AddNeighbours(ArrayList<Integer> selectedTile){
         ArrayList<ArrayList<Integer>> neighbourList = new ArrayList<>();
@@ -148,6 +153,16 @@ public class Player {
         playerGrid[2][2].setBackground(color);
         playerGrid[2][2].placeCastle();
         playerGrid[2][2].setEnabled(false);
+    }
+    public boolean isFull(){
+        for(int x=0; x<5; x++){
+            for (int y=0; y<5; y++){
+                if (playerGrid[x][y].getOccupied() == false){
+                    return false;
+                }
+            }
+        }
+        return true;
     }
     
     //Takes a Tile as a parameter and returns an ArrayList of all the neighbouring tiles that share a terrain type.

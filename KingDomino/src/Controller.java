@@ -28,7 +28,11 @@ public class Controller implements ActionListener{
         buttonsList = gameUI.getButtons();
 
         //if 2 players removeHalf
-        deck = new DominoGenerator().getDeck();
+        DominoGenerator  dominoGenerator= new DominoGenerator();
+        deck = dominoGenerator.getDeck();
+        /*if (playerList.length == 2){
+            dominoGenerator.removeHalfOfDeck(deck);
+        }*/
 
         //set the initial order of play
         initializeGame();
@@ -60,14 +64,38 @@ public class Controller implements ActionListener{
                 if (flag == 0){  //first tile clicked
                     firstTile = tile;
                     tile.setBackground(Color.lightGray);
-                    currentPlayer.enableNeighbour(tile.getCoord());
+                    boolean IsNeighbourClickable = currentPlayer.enableNeighbour(firstTile.getCoord());
+                    if (IsNeighbourClickable){
                     flag++;
+                    }
+                    else {
+                        flag = 0; //reset flag 
+                        //post round actions
+                        firstTile.setEnabled(false);
+                        firstTile.setOccupied(true); //this disables the tile
+                        currentPlayer.setPlayerGrid(false);
+                        currentPlayer.setTileColorWhite();
+                        removeMiddleTile();
+                        if (getPlayerTurn() == false){drawDomino.setEnabled(true);}
+                        setMiddleGrid(true);
+                    }
                 }
                 else if (flag == 1){ //second tile clicked
                     if (tile != firstTile){ //prevent the user for clicking the same tile twice.
                         tile.setBackground(Color.lightGray);
                         //check if valid blah blah blah
                         checkValidity(currentPlayer, firstTile, tile);
+                        //End game
+                        if(currentPlayer.isFull() || isMiddleGridNull()){
+                            //end the game here 
+                            System.out.println("THE GAME MUST END NOW!!!");
+                            if (getWinner()){
+                                turnLabel.setText("The Winner is :" + playerList[0].getName());
+                            }
+                            else {
+                                turnLabel.setText("It is a draw.....");
+                            }
+                        }
                         //post round actions
                         currentPlayer.setPlayerGrid(false);
                         if (getPlayerTurn() == false){drawDomino.setEnabled(true);}
@@ -78,10 +106,14 @@ public class Controller implements ActionListener{
             }
         }
         if (selected.equals(drawDomino)){
-            withdrawDominos();
+            boolean result = withdrawDominos();
             JFrame frame = gameUI.getFrame();
             frame.revalidate(); //without this the dominos aren't visble unless if the window is resized!
             drawDomino.setEnabled(false);
+            
+            if (result==false){
+                drawDomino.removeActionListener(this); // game ends
+            }
             
             
         }
@@ -144,6 +176,18 @@ public class Controller implements ActionListener{
     private boolean withdrawDominos(){
         if (deck.size() ==0){ //empty deck
             System.out.println("END GAME!!");
+            //flip it
+            Tile[] topTiles = middleGrid[0].clone();
+            Tile[] bottomTiles = middleGrid[1].clone();
+            //swap
+            middleGrid = new Tile[2][4];
+            middleGrid[0] = bottomTiles;
+            middleGrid[1] = topTiles;
+
+            gameUI.updateMiddleGrid(middleGrid); //to swap it in the UI
+            getPlayerTurn();
+            disableEverything();
+            setMiddleGrid(true);
             return false;
 
         }
@@ -163,6 +207,9 @@ public class Controller implements ActionListener{
                 tile.setDomino(domino);
                 
             }
+            getPlayerTurn();
+            disableEverything();
+            setMiddleGrid(true);
             return true;
         }
         //other rounds //move top row to the bottom, and the bottom row to the top and then populate!
@@ -304,6 +351,32 @@ public class Controller implements ActionListener{
             tile.placeDomino(domino, 0);
             tile.setDomino(domino);
         }
+    }
+    //identifying when the game ends
+    private boolean isMiddleGridNull(){
+        for (int x=0; x<2; x++){
+            for (int y=0; y<4; y++){
+                if (middleGrid[x][y].getDomino() != null){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    private boolean getWinner(){
+        ArrayList<Integer> points = new ArrayList<>();
+        for (Player player: playerList){
+            points.add(player.calculateScore());
+        }
+        Set<Integer> set = new HashSet<>(points);
+        //in case of a draw
+        if (set.size() < points.size()){
+            return false;
+        }             
+        Arrays.sort(playerList, Comparator.comparingInt(Player::calculateScore).reversed()); //first player is the winner in playerList[]....
+        return true;
+
     }
     
 

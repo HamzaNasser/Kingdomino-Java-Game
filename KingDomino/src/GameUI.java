@@ -34,9 +34,9 @@ public class GameUI extends JPanel{
         test = new JButton("Test");
 
         topPanel.add(save);
-        topPanel.add(load);
+        //topPanel.add(load);
         topPanel.add(draw);
-        topPanel.add(test);
+        //topPanel.add(test);
 
         topPanel.add(Box.createRigidArea(new Dimension(10,10)));
         turnLabel = new JLabel("Welcome to KING DOMINO!!!");
@@ -66,6 +66,7 @@ public class GameUI extends JPanel{
         // setting the player grid for each player
         for (int x =0; x < players.size(); x++){
             players.get(x).setGrid(listOfGrid.get(x));
+            players.get(x).createCastle();
         }
 
         //player1 = new Player("Bob", Color.red, l1);
