@@ -1,4 +1,6 @@
 Please Run from the Command Line., MainUI has the the main method.
+PLEASE CHECK THIS VIDEO DEMO FOR CLARITY: https://drive.google.com/file/d/14I5q3hfEfYpMb1dClKUckvVrGEeMCKdM/view?usp=sharing
+thank you!
 
 There is only 2 and 4 player game with actual players implemented, so please choose that option.
 As we counldn't implement the AI version of the game.
