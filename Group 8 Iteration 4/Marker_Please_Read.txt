@@ -1,0 +1,14 @@
+There is only 2 and 4 player game with actual players implemented, so please choose that option.
+As we counldn't implement the AI version of the game.
+
+Before every turn please click on an availaible domino in the middle grid, and then pick 2 squares
+on the player grid, to place the tiles. The sequence in which these tiles are clicked determine the 
+order.
+
+King Figures are represented by the border around the middle gird tiles.
+
+End game (points calculation) is also in complete.
+
+We tired to address the Color Deficiency by allowing users to make colors of their choice.
+
+ 
