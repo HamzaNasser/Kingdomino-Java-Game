@@ -1,4 +1,6 @@
-# Kingdomino is a boardgame, released in 2017 by Blue Orange Games. 
+# Kingdomino 
+
+Kingdomino is a boardgame, released in 2017 by Blue Orange Games. 
 
 This is an attempt at a Java implementation of said board game. 
 
